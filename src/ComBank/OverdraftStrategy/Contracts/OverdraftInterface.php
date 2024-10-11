@@ -9,6 +9,7 @@
 
 interface OverdraftInterface
 {
+  public function isGrantOverdraftFunds(float $funds): bool;
 
-   
+  public function getOverdraftFundsAmount() : float;
 }
