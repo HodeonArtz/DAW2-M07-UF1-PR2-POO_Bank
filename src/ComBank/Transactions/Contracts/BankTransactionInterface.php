@@ -13,5 +13,9 @@ use ComBank\OverdraftStrategy\Contracts\OverdraftInterface;
 
 interface BankTransactionInterface
 {
-    
+    public function applyTransaction(BankTransactionInterface $transaction): float;
+
+    public function getTransactionInfo(): string;
+
+    public function getAmount(): float;
 }
