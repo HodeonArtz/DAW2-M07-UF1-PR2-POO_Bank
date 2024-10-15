@@ -27,6 +27,10 @@ class BankAccount implements BackAccountInterface
 
   }
 
+  public function __construct(float $balance = 0) {
+    $this->balance = $balance;
+  }
+
   public function openAccount() : bool{
     if($this->status!== null){
       return false;
