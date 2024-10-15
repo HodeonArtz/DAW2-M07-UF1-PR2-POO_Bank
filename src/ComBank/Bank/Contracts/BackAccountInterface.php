@@ -19,7 +19,7 @@ interface BackAccountInterface
 
     public function transaction(BankTransactionInterface $transaction) : void;
     
-    public function openAccount() : void;
+    public function openAccount() : bool;
 
     public function reopenAccount() : void;
 

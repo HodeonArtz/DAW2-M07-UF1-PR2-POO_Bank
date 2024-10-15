@@ -27,8 +27,7 @@ class BankAccount implements BackAccountInterface
 
   }
 
-  public function openAccount() : void{
-
+  public function openAccount() : bool{
   }
 
   public function reopenAccount() : void{
@@ -36,7 +35,7 @@ class BankAccount implements BackAccountInterface
   }
 
   public function closeAccount() : void{
-
+    
   }
 
   public function getBalance() : float{
