@@ -35,10 +35,18 @@ class BankAccount implements BackAccountInterface
   }
 
   public function reopenAccount() : void{
+    if($this->status===null || $this->status){
+      throw new BankAccountException();
+    }
+    $this->status = true;
+
   }
 
   public function closeAccount() : void{
-    
+    if($this->status===null || !$this->status){
+      throw new BankAccountException();
+    }
+    $this->status = false;
   }
 
   public function getBalance() : float{
