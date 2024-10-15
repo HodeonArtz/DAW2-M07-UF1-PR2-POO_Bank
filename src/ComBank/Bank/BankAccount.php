@@ -28,10 +28,13 @@ class BankAccount implements BackAccountInterface
   }
 
   public function openAccount() : bool{
+    if($this->status!== null){
+      return false;
+    }
+    return $this->status = true;
   }
 
   public function reopenAccount() : void{
-
   }
 
   public function closeAccount() : void{
