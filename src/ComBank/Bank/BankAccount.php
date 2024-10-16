@@ -21,7 +21,7 @@ use ComBank\Transactions\Contracts\BankTransactionInterface;
 class BankAccount implements BackAccountInterface
 {
   private float $balance;
-  private bool $status;
+  private bool $status ;
   private OverdraftInterface $overdraft;
   public function transaction(BankTransactionInterface $transaction) : void{
 
@@ -35,11 +35,12 @@ class BankAccount implements BackAccountInterface
     if($this->status!== null){
       return false;
     }
-    return $this->status = true;
+    $this->status = true;
+    return true;
   }
 
   public function reopenAccount() : void{
-    if($this->status===null || $this->status){
+    if(!isset($this->status) || $this->status !== false){
       throw new BankAccountException();
     }
     $this->status = true;
@@ -47,7 +48,7 @@ class BankAccount implements BackAccountInterface
   }
 
   public function closeAccount() : void{
-    if($this->status===null || !$this->status){
+    if($this->status === false){
       throw new BankAccountException();
     }
     $this->status = false;
