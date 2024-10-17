@@ -14,5 +14,6 @@ use ComBank\Transactions\Contracts\BankTransactionInterface;
 
 abstract class BaseTransaction
 {
+  use AmountValidationTrait;
   protected float $amount;
 }

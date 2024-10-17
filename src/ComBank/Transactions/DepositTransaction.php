@@ -14,9 +14,7 @@ use ComBank\Transactions\Contracts\BankTransactionInterface;
 class DepositTransaction extends BaseTransaction implements BankTransactionInterface 
 {
    public function __construct(float $amount) {
-    if($amount <= 0){
-      throw new ZeroAmountException("Amount should be a positive number.");
-    }
+    $this->validateAmount($amount);
     $this->amount = $amount;
   } 
   public function applyTransaction(BackAccountInterface $account): float{

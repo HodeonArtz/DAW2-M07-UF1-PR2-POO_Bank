@@ -20,6 +20,7 @@ use ComBank\Transactions\Contracts\BankTransactionInterface;
 
 class BankAccount implements BackAccountInterface
 {
+  use AmountValidationTrait;
   private float $balance;
   private bool $status = true;
   private OverdraftInterface $overdraft;
