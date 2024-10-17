@@ -29,6 +29,7 @@ class BankAccount implements BackAccountInterface
     $this->balance = $balance;
   }
   public function transaction(BankTransactionInterface $transaction) : void{
+    if(!$this->status) throw new BankAccountException("Can't do a transaction when account is closed.");
     $transaction->applyTransaction($this);
   }
 
