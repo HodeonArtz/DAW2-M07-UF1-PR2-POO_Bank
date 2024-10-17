@@ -14,5 +14,5 @@ use ComBank\Transactions\Contracts\BankTransactionInterface;
 
 abstract class BaseTransaction
 {
-
+  protected float $amount;
 }

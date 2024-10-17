@@ -1,4 +1,5 @@
 <?php namespace ComBank\Transactions;
+use ComBank\Exceptions\ZeroAmountException;
 
 /**
  * Created by VS Code.
@@ -10,9 +11,24 @@
 use ComBank\Bank\Contracts\BackAccountInterface;
 use ComBank\Transactions\Contracts\BankTransactionInterface;
 
-class DepositTransaction 
+class DepositTransaction extends BaseTransaction implements BankTransactionInterface 
 {
+   public function __construct(float $amount) {
+    if($amount <= 0){
+      throw new ZeroAmountException("Amount should be a positive number.");
+    }
+    $this->amount = $amount;
+  } 
+  public function applyTransaction(BackAccountInterface $account): float{
+    $account->setBalance($account->getBalance() + $this->amount);
+    return $account->getBalance();
+  }
 
+    public function getTransactionInfo(): string{
+       return "DEPOSIT_TRANSACTION";
+    }
 
-   
+    public function getAmount(): float{
+      return $this->amount;
+    }
 }
