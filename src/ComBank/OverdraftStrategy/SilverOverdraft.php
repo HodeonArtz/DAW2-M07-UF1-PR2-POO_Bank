@@ -13,7 +13,7 @@
  * */
 class SilverOverdraft implements OverdraftInterface
 {
-  public function isGrantOverdraftFunds(float $funds): bool{
+  public function isGrantOverdraftFunds(float $balance): bool{
 
   }
 
