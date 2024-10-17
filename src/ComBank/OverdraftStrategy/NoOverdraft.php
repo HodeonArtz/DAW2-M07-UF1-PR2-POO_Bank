@@ -10,12 +10,14 @@
 
 class NoOverdraft implements OverdraftInterface
 {
+  const OVERDRAFT_AMOUNT = 0 ;
+
   public function isGrantOverdraftFunds(float $balance): bool{
-    return $balance >= 0;
+    return $balance >= self::OVERDRAFT_AMOUNT;
   }
 
   public function getOverdraftFundsAmount() : float{
-    return 0;
+    return self::OVERDRAFT_AMOUNT;
   }
    
 }
