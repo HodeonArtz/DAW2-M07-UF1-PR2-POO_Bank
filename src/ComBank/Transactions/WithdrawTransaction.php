@@ -8,6 +8,7 @@
  */
 
 use ComBank\Bank\Contracts\BackAccountInterface;
+use ComBank\Exceptions\FailedTransactionException;
 use ComBank\Exceptions\InvalidOverdraftFundsException;
 use ComBank\Transactions\Contracts\BankTransactionInterface;
 
@@ -18,10 +19,16 @@ class WithdrawTransaction extends BaseTransaction implements BankTransactionInte
     $this->amount = $amount;
   } 
   public function applyTransaction(BackAccountInterface $account): float{
-    if($this->amount > $account->getBalance()){
-       if($account->getOverdraft()->isGrantOverdraftFunds($account->getBalance()))
-        throw new InvalidOverdraftFundsException();
+    $accountOverdraft = $account->getOverdraft();
+
+    if(!$accountOverdraft->
+          isGrantOverdraftFunds($account->getBalance() - $this->amount)){
+      if($accountOverdraft->getOverdraftFundsAmount() > 0)
+        throw new FailedTransactionException();
+      
+      throw new InvalidOverdraftFundsException();
     }
+    
     $account->setBalance($account->getBalance() - $this->amount);
     return $account->getBalance();
   }
