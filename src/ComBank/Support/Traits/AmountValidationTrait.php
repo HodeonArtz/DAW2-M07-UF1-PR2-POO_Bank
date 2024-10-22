@@ -19,8 +19,8 @@ trait AmountValidationTrait
      */
     public function validateAmount(float $amount):void
     {
-      if($amount <= 0){
+      if($amount <= 0)
         throw new ZeroAmountException("Amount should be a positive number.");
-      }
+      
     }
 }
