@@ -41,7 +41,7 @@ class BankAccount implements BackAccountInterface
 
   public function reopenAccount() : void{
     if($this->status){
-      throw new BankAccountException();
+      throw new BankAccountException("Account is already opened.");
     }
     $this->status = true;
 
@@ -49,7 +49,7 @@ class BankAccount implements BackAccountInterface
 
   public function closeAccount() : void{
     if(!$this->status){
-      throw new BankAccountException();
+      throw new BankAccountException("Account is already closed.");
     }
     $this->status = false;
   }
