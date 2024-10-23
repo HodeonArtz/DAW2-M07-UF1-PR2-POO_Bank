@@ -25,7 +25,7 @@ $bankAccount1 = new BankAccount(400);
 pl('--------- [Start testing bank account #1, No overdraft] --------');
 try {
     // show balance account
-    pl($bankAccount1->getBalance());
+    pl("My balance : {$bankAccount1->getBalance()}");
     // close account
     $bankAccount1->closeAccount();
     // reopen account
@@ -69,7 +69,7 @@ pl('--------- [Start testing bank account #2, Silver overdraft (100.0 funds)] --
 try {
     
     // show balance account
-   $bankAccount2->getBalance();
+    pl("My balance : {$bankAccount2->getBalance()}");
     // deposit +100
     pl('Doing transaction deposit (+100) with current balance ' . $bankAccount2->getBalance());
     $bankAccount2->transaction(new DepositTransaction(100));
