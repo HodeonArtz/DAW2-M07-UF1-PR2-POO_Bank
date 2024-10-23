@@ -27,7 +27,7 @@ class WithdrawTransaction extends BaseTransaction implements BankTransactionInte
         throw new FailedTransactionException("Withdrawal exceeds overdraft limit.");
 
       if($accountOverdraft->getOverdraftFundsAmount() <= 0)
-        throw new InvalidOverdraftFundsException();
+        throw new InvalidOverdraftFundsException("Insufficient balance to complete the withdrawal.");
     }
     
     $account->setBalance($account->getBalance() - $this->amount);
