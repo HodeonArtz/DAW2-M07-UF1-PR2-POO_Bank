@@ -9,6 +9,8 @@
 
 use ComBank\Bank\BankAccount;
 use ComBank\OverdraftStrategy\SilverOverdraft;
+use ComBank\OverdraftStrategy\BasicOverdraft;
+use ComBank\OverdraftStrategy\GoldOverdraft;
 use ComBank\Transactions\DepositTransaction;
 use ComBank\Transactions\WithdrawTransaction;
 use ComBank\Exceptions\BankAccountException;

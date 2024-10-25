@@ -14,6 +14,8 @@
 class BasicOverdraft implements OverdraftInterface
 {
     const OVERDRAFT_AMOUNT = 50;
+    const INTEREST_RATE = 0.05;
+
   public function isGrantOverdraftFunds(float $balance): bool{
     return 0 <= (self::OVERDRAFT_AMOUNT + $balance);
   }

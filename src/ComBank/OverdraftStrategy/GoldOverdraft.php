@@ -13,7 +13,8 @@
  * */
 class GoldOverdraft implements OverdraftInterface
 {
-    const OVERDRAFT_AMOUNT = 500 ;
+    const OVERDRAFT_AMOUNT = 500;
+    const INTEREST_RATE = 0.01;
   public function isGrantOverdraftFunds(float $balance): bool{
     return 0 <= (self::OVERDRAFT_AMOUNT + $balance);
   }

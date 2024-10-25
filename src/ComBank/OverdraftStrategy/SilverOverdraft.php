@@ -13,7 +13,8 @@
  * */
 class SilverOverdraft implements OverdraftInterface
 {
-    const OVERDRAFT_AMOUNT = 100 ;
+    const OVERDRAFT_AMOUNT = 100;
+    const INTEREST_RATE = 0.02;
   public function isGrantOverdraftFunds(float $balance): bool{
     return 0 <= (self::OVERDRAFT_AMOUNT + $balance);
   }
