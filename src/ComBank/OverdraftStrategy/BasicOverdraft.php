@@ -3,13 +3,13 @@
 
 /**
  * Created by VS Code.
- * User: JPortugal
+ * User: HodeonArtz
  * Date: 7/28/24
  * Time: 1:39 PM
  */
 
 /**
- * @description: Grant 100.00 overdraft funds.
+ * @description: Grant 50.00 overdraft funds.
  * */
 class BasicOverdraft implements OverdraftInterface
 {
@@ -24,4 +24,7 @@ class BasicOverdraft implements OverdraftInterface
     return self::OVERDRAFT_AMOUNT;
   }
 
+  public function getInterestRate(): float{
+    return self::INTEREST_RATE;
+  }
 }

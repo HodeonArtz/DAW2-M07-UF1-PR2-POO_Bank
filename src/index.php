@@ -112,3 +112,43 @@ try {
 } catch (BankAccountException $e) {
     pl("Error: ".$e->getMessage());
 }
+
+
+
+//---[Bank account 3]---/
+$bankAccount3 = new BankAccount(200);
+$bankAccount3->applyOverdraft(new BasicOverdraft());
+pl('--------- [Start testing bank account #3, Basic overdraft (50.0 funds)] --------');
+try {
+    
+    // show balance account
+    pl("My balance : {$bankAccount3->getBalance()}");
+    
+    // withdrawal -300
+    pl('Doing transaction withdrawal (-225) with current balance ' . $bankAccount3->getBalance());
+    $bankAccount3->transaction(new WithdrawTransaction(225));
+   
+    pl('My new balance after withdrawal (-225) : ' . $bankAccount3->getBalance());
+
+    pl('Doing transaction withdrawal (-25) with current balance : ' . $bankAccount3->getBalance());
+    $bankAccount3->transaction(new WithdrawTransaction(25));
+
+    pl('My new balance after withdrawal (-25) : ' . $bankAccount3->getBalance());
+
+} catch (FailedTransactionException $e) {
+    pl('Error transaction: ' . $e->getMessage());
+}
+
+try {
+  pl('Doing transaction withdrawal (-20) with current balance ' . $bankAccount3->getBalance());
+    $bankAccount3->transaction(new WithdrawTransaction(20));
+   
+    $interest_rate = $bankAccount3->getOverdraft()->getInterestRate() * 100;
+
+    pl("My new balance after withdrawal (-20) with interest rate ($interest_rate%) : " . $bankAccount3->getBalance());
+} catch (FailedTransactionException $e) {
+  pl('Error transaction: ' . $e->getMessage());
+}
+
+  
+pl('My new balance after withdrawal (-25) with funds : ' . $bankAccount3->getBalance());

@@ -23,4 +23,7 @@ class SilverOverdraft implements OverdraftInterface
     return self::OVERDRAFT_AMOUNT;
   }
 
+  function getInterestRate(): float{
+    return self::INTEREST_RATE;
+  }
 }

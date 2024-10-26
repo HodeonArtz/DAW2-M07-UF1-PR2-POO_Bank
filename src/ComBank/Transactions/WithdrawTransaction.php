@@ -18,11 +18,18 @@ class WithdrawTransaction extends BaseTransaction implements BankTransactionInte
     $this->validateAmount($amount);
     $this->amount = $amount;
   } 
+
   public function applyTransaction(BackAccountInterface $account): float{
-    $accountOverdraft = $account->getOverdraft();
+    $accountOverdraft = $account->getOverdraft(); 
+    $finalBalance = $account->getBalance() - $this->amount;
+
+    if($account->getBalance() < 0){
+      $finalBalance -= $account->getBalance() * -$accountOverdraft->getInterestRate();
+    }
 
     if(!$accountOverdraft->
-          isGrantOverdraftFunds($account->getBalance() - $this->amount)){
+          isGrantOverdraftFunds($finalBalance)){
+            
       if($accountOverdraft->getOverdraftFundsAmount() > 0)
         throw new FailedTransactionException("Withdrawal exceeds overdraft limit.");
 
@@ -30,7 +37,7 @@ class WithdrawTransaction extends BaseTransaction implements BankTransactionInte
         throw new InvalidOverdraftFundsException("Insufficient balance to complete the withdrawal.");
     }
     
-    $account->setBalance($account->getBalance() - $this->amount);
+    $account->setBalance($finalBalance);
     return $account->getBalance();
   }
 
