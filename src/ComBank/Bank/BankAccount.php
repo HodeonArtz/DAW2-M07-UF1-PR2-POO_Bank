@@ -24,6 +24,7 @@ class BankAccount implements BackAccountInterface
   private float $balance;
   private bool $status = true;
   private OverdraftInterface $overdraft;
+  private array $transactionHistory = [];
 
   public function __construct(float $balance = 0) {
     $this->balance = $balance;
@@ -33,6 +34,18 @@ class BankAccount implements BackAccountInterface
   public function transaction(BankTransactionInterface $transaction) : void{
     if(!$this->status) throw new BankAccountException("Can't do a transaction when account is closed.");
     $transaction->applyTransaction($this);
+    array_push(
+      $this->transactionHistory,
+      [
+        "type" => $transaction->getTransactionInfo(),
+        "amount" => $transaction->getAmount(),
+        "date" => date("H:i:s d/m/Y")
+      ]
+    ); 
+  }
+
+  public function getTransactionHistory(): array{
+    return $this->transactionHistory;
   }
 
   public function openAccount() : bool{

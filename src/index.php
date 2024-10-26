@@ -23,6 +23,16 @@ require_once 'bootstrap.php';
 
 //---[Bank account 1]---/
 // create a new account1 with balance 400
+function showTransactionHistory(array $history): void {
+  pl("---------- Transaction History ----------");
+  foreach ($history as $key => $transaction) {
+    pl("-----------------------------------------");
+    pl("Transaction type: {$transaction["type"]}");
+    pl("Amount: {$transaction["amount"]}");
+    pl("Date: {$transaction["date"]}");
+  }
+}
+
 $bankAccount1 = new BankAccount(400);
 pl('--------- [Start testing bank account #1, No overdraft] --------');
 try {
@@ -152,3 +162,5 @@ try {
 
   
 pl('My new balance after withdrawal (-25) with funds : ' . $bankAccount3->getBalance());
+
+showTransactionHistory($bankAccount3->getTransactionHistory());
